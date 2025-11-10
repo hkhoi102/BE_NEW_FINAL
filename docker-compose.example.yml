@@ -1,0 +1,182 @@
+version: '3.8'
+
+services:
+  # Discovery Server
+  discovery-server:
+    image: discovery-server:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - smart-retail-network
+
+  # Service Product (cần AWS S3 keys)
+  service-product:
+    image: service-product:latest
+    ports:
+      - "8084:8084"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # Order Service (cần email và JWT)
+  order-service:
+    image: order-service:latest
+    ports:
+      - "8088:8088"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # User Service (cần email và JWT)
+  user-service:
+    image: user-service:latest
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # Auth Service (cần JWT)
+  service-auth:
+    image: service-auth:latest
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # Payment Service (cần SePay keys)
+  payment-service:
+    image: payment-service:latest
+    ports:
+      - "8090:8090"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # Service Customer
+  service-customer:
+    image: service-customer:latest
+    ports:
+      - "8083:8083"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # Inventory Service
+  inventory-service:
+    image: inventory-service:latest
+    ports:
+      - "8086:8086"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # Promotion Service
+  promotion-service:
+    image: promotion-service:latest
+    ports:
+      - "8087:8087"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # API Gateway (phải start sau các services khác)
+  api-gateway:
+    image: api-gateway:latest
+    ports:
+      - "8085:8085"
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      - discovery-server
+      - service-auth
+      - user-service
+      - service-customer
+      - service-product
+      - inventory-service
+      - order-service
+      - promotion-service
+      - payment-service
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+  # AI Service (cần Google/OpenAI API key)
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./ai-service/.env
+    environment:
+      - MYSQL_URL=${MYSQL_URL}
+    networks:
+      - smart-retail-network
+    restart: unless-stopped
+
+networks:
+  smart-retail-network:
+    driver: bridge
+

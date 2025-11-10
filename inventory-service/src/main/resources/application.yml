@@ -1,0 +1,14 @@
+service:
+  product:
+    url: http://localhost:8085
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+spring:
+  cloud:
+    discovery:
+      enabled: true
+

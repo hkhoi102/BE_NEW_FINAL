@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Retail AI Chatbox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 900px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .chat-header .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .clear-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.assistant {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+            padding: 0 5px;
+        }
+
+        .message.user .message-time {
+            text-align: right;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 18px;
+            background: white;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .chat-input-container {
+            padding: 20px 25px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 15px;
+            resize: none;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            max-height: 120px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-width: 80px;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #dc2626;
+        }
+
+        .route-badge {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 5px;
+            background: #e5e7eb;
+            color: #666;
+        }
+
+        .route-badge.sql {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .route-badge.rag {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .route-badge.quota_error {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .quota-error-message {
+            background: #fff7ed;
+            border: 2px solid #fb923c;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 10px 0;
+        }
+
+        .quota-error-message strong {
+            color: #dc2626;
+        }
+
+        /* Scrollbar styling */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Welcome message */
+        .welcome-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .welcome-message h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .welcome-message p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chat-container {
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .chat-header {
+                padding: 15px 20px;
+            }
+
+            .chat-header h1 {
+                font-size: 20px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div>
+                <h1>🤖 Smart Retail AI Assistant</h1>
+                <div class="status">
+                    <span class="status-dot"></span>
+                    <span>Đang hoạt động</span>
+                </div>
+            </div>
+            <button class="clear-btn" onclick="clearChat()">Xóa lịch sử</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <h2>👋 Chào mừng!</h2>
+                <p>Tôi là trợ lý AI cho hệ thống siêu thị. Bạn có thể hỏi tôi về:</p>
+                <p style="margin-top: 10px;">
+                    • Sản phẩm, giá cả, tồn kho<br>
+                    • Thống kê doanh số, đơn hàng<br>
+                    • Chính sách và hướng dẫn
+                </p>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <textarea
+                    id="chatInput"
+                    class="chat-input"
+                    placeholder="Nhập câu hỏi của bạn..."
+                    rows="1"
+                    onkeydown="handleKeyDown(event)"
+                    oninput="autoResize(this)"
+                ></textarea>
+                <button id="sendBtn" class="send-btn" onclick="sendMessage()">Gửi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        const USER_ID = 'user_' + Date.now();
+        let conversationHistory = [];
+
+        // Auto resize textarea
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        // Handle Enter key
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Simple markdown to HTML converter (basic support)
+        function markdownToHtml(text) {
+            // Convert **text** to <strong>text</strong>
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Convert line breaks to <br>
+            text = text.replace(/\n/g, '<br>');
+            return text;
+        }
+
+        // Add message to chat
+        function addMessage(role, content, route = null, isQuotaError = false) {
+            const messagesContainer = document.getElementById('chatMessages');
+
+            // Remove welcome message if exists
+            const welcomeMsg = messagesContainer.querySelector('.welcome-message');
+            if (welcomeMsg) {
+                welcomeMsg.remove();
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+
+            const contentDiv = document.createElement('div');
+            if (isQuotaError) {
+                contentDiv.className = 'message-content quota-error-message';
+            } else {
+                contentDiv.className = 'message-content';
+            }
+
+            // Convert markdown to HTML
+            contentDiv.innerHTML = markdownToHtml(content);
+
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'message-time';
+            timeDiv.textContent = new Date().toLocaleTimeString('vi-VN', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            if (route) {
+                const badge = document.createElement('span');
+                badge.className = `route-badge ${route}`;
+                let badgeText = route.toUpperCase();
+                if (route === 'quota_error') {
+                    badgeText = 'QUOTA EXCEEDED';
+                }
+                badge.textContent = badgeText;
+                contentDiv.appendChild(document.createElement('br'));
+                contentDiv.appendChild(badge);
+            }
+
+            messageDiv.appendChild(contentDiv);
+            messageDiv.appendChild(timeDiv);
+            messagesContainer.appendChild(messageDiv);
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Add to conversation history (only if not quota error to avoid spam)
+            if (!isQuotaError || route !== 'quota_error') {
+                conversationHistory.push({ role, content });
+            }
+        }
+
+        // Show typing indicator
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator active';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Hide typing indicator
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = `❌ Lỗi: ${message}`;
+            messagesContainer.appendChild(errorDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Send message to API
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const question = input.value.trim();
+
+            if (!question) return;
+
+            // Disable input and button
+            input.disabled = true;
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Đang gửi...';
+
+            // Add user message
+            addMessage('user', question);
+
+            // Clear input
+            input.value = '';
+            input.style.height = 'auto';
+            input.disabled = false;
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                const response = await fetch(`${API_URL}/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        question: question,
+                        user_id: USER_ID,
+                        top_k: 4,
+                        conversation_history: conversationHistory
+                    })
+                });
+
+                hideTypingIndicator();
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Check if it's a quota error
+                const isQuotaError = data.route === 'quota_error' || data.error === 'quota_exceeded';
+
+                // Add assistant message
+                addMessage('assistant', data.answer, data.route, isQuotaError);
+
+                // If quota error and has retry_after, optionally show countdown
+                if (isQuotaError && data.retry_after) {
+                    const retrySeconds = parseFloat(data.retry_after);
+                    if (retrySeconds > 0) {
+                        console.log(`Quota exceeded. Retry after ${retrySeconds} seconds.`);
+                    }
+                }
+
+            } catch (error) {
+                hideTypingIndicator();
+                console.error('Error:', error);
+
+                let errorMessage = 'Không thể kết nối đến server. ';
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage += 'Vui lòng kiểm tra xem AI service đã chạy chưa (http://localhost:8000).';
+                } else {
+                    errorMessage += error.message;
+                }
+
+                showError(errorMessage);
+            } finally {
+                // Re-enable input and button
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Gửi';
+                input.focus();
+            }
+        }
+
+        // Clear chat
+        function clearChat() {
+            if (!confirm('Bạn có chắc muốn xóa toàn bộ lịch sử chat?')) {
+                return;
+            }
+
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.innerHTML = `
+                <div class="welcome-message">
+                    <h2>👋 Chào mừng!</h2>
+                    <p>Lịch sử chat đã được xóa. Bạn có thể bắt đầu cuộc trò chuyện mới.</p>
+                </div>
+            `;
+            conversationHistory = [];
+
+            // Clear on server
+            fetch(`${API_URL}/conversation/${USER_ID}`, {
+                method: 'DELETE'
+            }).catch(err => console.error('Failed to clear server history:', err));
+        }
+
+        // Focus input on load
+        window.addEventListener('load', () => {
+            document.getElementById('chatInput').focus();
+        });
+    </script>
+</body>
+</html>
+

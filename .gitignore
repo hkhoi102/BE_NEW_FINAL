@@ -1,0 +1,64 @@
+# Environment variables và secrets
+.env
+.env.local
+.env.*.local
+*.env
+!*.env.example
+!*.env.sample
+
+# Application properties có chứa secrets (nếu cần)
+# Uncomment dòng dưới nếu muốn ignore application.properties có key
+# **/application.properties
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Build files
+target/
+build/
+dist/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# AI Service data
+ai-service/data/chroma/
+ai-service/data/docs/
+
+# Uploads
+uploads/
+
+# Error logs
+hs_err_pid*.log
+replay_pid*.log
+
