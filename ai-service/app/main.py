@@ -22,8 +22,8 @@ from langchain_core.messages import HumanMessage, AIMessage
 # Load environment variables from .env if present
 try:
 	from dotenv import load_dotenv
-	# load_dotenv()
-    load_dotenv(override=False)
+	load_dotenv()
+    # load_dotenv(override=False)
 except Exception:
 	pass
 
@@ -38,7 +38,8 @@ USE_GEMINI = os.getenv("USE_GEMINI", "true").lower() == "true" and bool(GOOGLE_A
 CHROMA_DIR = os.getenv("CHROMA_DIR", "./data/chroma")
 DOCS_DIR = os.getenv("DOCS_DIR", "./data/docs")
 # Cách 1: cross-database, kết nối vào 1 schema có quyền (vd product_db) và query db.table
-MYSQL_URL = os.getenv("MYSQL_URL", "mysql+pymysql://reader:reader@localhost:3306/product_db")
+# Default sử dụng 172.17.0.1 (Docker host IP) để kết nối từ container
+MYSQL_URL = os.getenv("MYSQL_URL", "mysql+pymysql://reader:reader@172.17.0.1:3306/product_db")
 # Gemini model name - use names from /gemini/models endpoint (without "models/" prefix)
 # Recommended: gemini-2.5-flash (fast, stable) or gemini-2.5-pro (more powerful)
 MODEL_NAME = os.getenv("MODEL_NAME", "gemini-2.5-flash")
