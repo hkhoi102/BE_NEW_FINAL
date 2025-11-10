@@ -22,7 +22,8 @@ from langchain_core.messages import HumanMessage, AIMessage
 # Load environment variables from .env if present
 try:
 	from dotenv import load_dotenv
-	load_dotenv()
+	# load_dotenv()
+    load_dotenv(override=False)
 except Exception:
 	pass
 
