@@ -22,15 +22,11 @@ public class CustomerInfoService {
             throw new RuntimeException("Invalid or expired token");
         }
 
-        Long userId = jwtTokenProvider.getUserIdFromToken(token);
-        if (userId == null) {
-            throw new RuntimeException("User ID not found in token");
-        }
-
         try {
-            Map<String, Object> response = customerServiceClient.getCustomerByUserId(userId, authHeader);
+            // Ưu tiên gọi /me qua Gateway để tránh yêu cầu quyền admin ở /by-user/{id}
+            Map<String, Object> response = customerServiceClient.getCurrentCustomer(authHeader);
             if (response != null) {
-                // Customer Service trả về CustomerInfo object trực tiếp, không wrap trong "data"
+                // Customer Service trả về CustomerInfo object trực tiếp
                 Long customerId = ((Number) response.get("id")).longValue();
                 return customerId;
             }
@@ -38,7 +34,7 @@ public class CustomerInfoService {
             throw new RuntimeException("Failed to get customer information: " + e.getMessage());
         }
 
-        throw new RuntimeException("Customer not found for user ID: " + userId);
+        throw new RuntimeException("Customer not found");
     }
 
     /**
@@ -51,13 +47,8 @@ public class CustomerInfoService {
             return null;
         }
 
-        Long userId = jwtTokenProvider.getUserIdFromToken(token);
-        if (userId == null) {
-            return null;
-        }
-
         try {
-            Map<String, Object> response = customerServiceClient.getCustomerByUserId(userId, authHeader);
+            Map<String, Object> response = customerServiceClient.getCurrentCustomer(authHeader);
             if (response != null) {
                 return ((Number) response.get("id")).longValue();
             }
@@ -73,13 +64,8 @@ public class CustomerInfoService {
             throw new RuntimeException("Invalid or expired token");
         }
 
-        Long userId = jwtTokenProvider.getUserIdFromToken(token);
-        if (userId == null) {
-            throw new RuntimeException("User ID not found in token");
-        }
-
         try {
-            Map<String, Object> response = customerServiceClient.getCustomerByUserId(userId, authHeader);
+            Map<String, Object> response = customerServiceClient.getCurrentCustomer(authHeader);
             if (response != null) {
                 // Customer Service trả về CustomerInfo object trực tiếp
                 return response;
@@ -88,7 +74,7 @@ public class CustomerInfoService {
             throw new RuntimeException("Failed to get customer information: " + e.getMessage());
         }
 
-        throw new RuntimeException("Customer not found for user ID: " + userId);
+        throw new RuntimeException("Customer not found");
     }
 
     public Map<String, Object> getCustomerProfile(String authHeader) {
