@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Map;
 
-@FeignClient(name = "promotion-service", url = "http://localhost:8085")
+@FeignClient(name = "promotion-service", url = "${promotion.service.url:http://localhost:8085}")
 public interface PromotionServiceClient {
 
     @GetMapping("/api/promotions/headers/{id}")

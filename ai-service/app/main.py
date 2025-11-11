@@ -22,8 +22,7 @@ from langchain_core.messages import HumanMessage, AIMessage
 # Load environment variables from .env if present
 try:
 	from dotenv import load_dotenv
-	load_dotenv()
-    # load_dotenv(override=False)
+	load_dotenv(override=False)  # Don't override existing env vars (from Docker)
 except Exception:
 	pass
 

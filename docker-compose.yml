@@ -37,6 +37,13 @@ services:
       - SPRING_PROFILES_ACTIVE=prod
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://172.17.0.1:3306/order_db?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      # Service URLs for Docker network communication
+      - PRODUCT_SERVICE_URL=http://api-gateway:8085
+      - PROMOTION_SERVICE_URL=http://api-gateway:8085
+      - INVENTORY_SERVICE_URL=http://api-gateway:8085
+      - USER_SERVICE_URL=http://api-gateway:8085
+      - CUSTOMER_SERVICE_URL=http://api-gateway:8085
+      - API_GATEWAY_URL=http://api-gateway:8085
     depends_on:
       - discovery-server
     networks:
@@ -54,7 +61,8 @@ services:
       - SPRING_PROFILES_ACTIVE=prod
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://172.17.0.1:3306/user_db?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-
+      # Service URLs for Docker network communication
+      - API_GATEWAY_URL=http://api-gateway:8085
     depends_on:
       - discovery-server
     networks:
@@ -121,6 +129,8 @@ services:
       - SPRING_PROFILES_ACTIVE=prod
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://172.17.0.1:3306/invetory_db?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      # Service URLs for Docker network communication
+      - SERVICE_PRODUCT_URL=http://api-gateway:8085
     depends_on:
       - discovery-server
     networks:
@@ -138,6 +148,8 @@ services:
       - SPRING_PROFILES_ACTIVE=prod
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://172.17.0.1:3306/promotion_db?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      # Service URLs for Docker network communication
+      - API_GATEWAY_URL=http://api-gateway:8085
     depends_on:
       - discovery-server
     networks:

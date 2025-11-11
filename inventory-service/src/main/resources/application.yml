@@ -1,6 +1,6 @@
 service:
   product:
-    url: http://localhost:8085
+    url: ${SERVICE_PRODUCT_URL:http://localhost:8085}
 
 eureka:
   client:
