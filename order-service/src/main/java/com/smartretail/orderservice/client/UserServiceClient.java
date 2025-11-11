@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Map;
 
-@FeignClient(name = "user-service", url = "${user.service.url:http://localhost:8085}")
+@FeignClient(name = "user-service", url = "${user.service.url:http://api-gateway:8085}")
 public interface UserServiceClient {
 
     @GetMapping("/api/users/me")
