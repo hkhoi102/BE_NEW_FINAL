@@ -1,7 +1,9 @@
 services:
   # Discovery Server
   discovery-server:
-    image: discovery-server:latest
+    build:
+      context: ./discovery-server
+      dockerfile: Dockerfile
     ports:
       - "8761:8761"
     networks:
@@ -9,7 +11,9 @@ services:
 
   # Service Product (cần AWS S3 keys)
   service-product:
-    image: service-product:latest
+    build:
+      context: ./service-product
+      dockerfile: Dockerfile
     ports:
       - "8084:8084"
     env_file:
@@ -26,7 +30,9 @@ services:
 
   # Order Service (cần email và JWT)
   order-service:
-    image: order-service:latest
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
     ports:
       - "8088:8088"
     env_file:
@@ -50,7 +56,9 @@ services:
 
   # User Service (cần email và JWT)
   user-service:
-    image: user-service:latest
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
     ports:
       - "8082:8082"
     env_file:
@@ -69,7 +77,9 @@ services:
 
   # Auth Service (cần JWT)
   service-auth:
-    image: service-auth:latest
+    build:
+      context: ./service-auth
+      dockerfile: Dockerfile
     ports:
       - "8081:8081"
     env_file:
@@ -85,7 +95,9 @@ services:
 
   # Payment Service (cần SePay keys)
   payment-service:
-    image: payment-service:latest
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile
     ports:
       - "8090:8090"
     env_file:
@@ -101,7 +113,9 @@ services:
 
   # Service Customer
   service-customer:
-    image: service-customer:latest
+    build:
+      context: ./service-customer
+      dockerfile: Dockerfile
     ports:
       - "8083:8083"
     env_file:
@@ -118,7 +132,9 @@ services:
 
   # Inventory Service
   inventory-service:
-    image: inventory-service:latest
+    build:
+      context: ./inventory-service
+      dockerfile: Dockerfile
     ports:
       - "8086:8086"
     env_file:
@@ -137,7 +153,9 @@ services:
 
   # Promotion Service
   promotion-service:
-    image: promotion-service:latest
+    build:
+      context: ./promotion-service
+      dockerfile: Dockerfile
     ports:
       - "8087:8087"
     env_file:
@@ -156,7 +174,9 @@ services:
 
   # API Gateway (phải start sau các services khác)
   api-gateway:
-    image: api-gateway:latest
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
     ports:
       - "8085:8085"
     env_file:
