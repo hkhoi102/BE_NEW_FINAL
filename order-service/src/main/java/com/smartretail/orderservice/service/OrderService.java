@@ -63,8 +63,8 @@ public class OrderService {
 
     // Tạo đơn hàng mới với token
     public OrderDto.OrderResponse createOrder(OrderDto.CreateOrderRequest request, String authHeader) {
-        // Lấy customer ID từ token
-        Long customerId = customerInfoService.getCustomerIdFromToken(authHeader);
+        // Lấy/khởi tạo customer ID từ token (auto-provision nếu cần, dùng phone trong request)
+        Long customerId = customerInfoService.ensureCustomer(authHeader, request.getPhoneNumber());
 
         // Lấy warehouseId và stockLocationId từ user profile
         Long warehouseId = null;

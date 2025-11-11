@@ -90,4 +90,43 @@ public class CustomerInfoService {
             return java.util.Collections.emptyMap();
         }
     }
+
+    /**
+     * Ensure a customer exists for the current user. If not found, attempt to auto-provision.
+     * fallbackPhone will be used when creating the customer if the token doesn't contain a phone claim.
+     */
+    public Long ensureCustomer(String authHeader, String fallbackPhone) {
+        try {
+            Long id = getCustomerIdFromToken(authHeader);
+            if (id != null) return id;
+        } catch (Exception ignored) {}
+
+        // Auto-provision using claims
+        String token = jwtTokenProvider.extractTokenFromHeader(authHeader);
+        if (token == null || !jwtTokenProvider.validateToken(token)) {
+            throw new RuntimeException("Invalid or expired token");
+        }
+        Long userId = jwtTokenProvider.getUserIdFromToken(token);
+        if (userId == null) {
+            throw new RuntimeException("User ID not found in token");
+        }
+        String subject = jwtTokenProvider.getUsernameFromToken(token);
+        String email = (subject != null && subject.contains("@"))
+                ? subject
+                : "user" + userId + "@local";
+        String name = (subject != null && !subject.isBlank()) ? subject : ("User " + userId);
+        String phone = (fallbackPhone != null && !fallbackPhone.isBlank()) ? fallbackPhone : "0000000000";
+
+        java.util.Map<String, Object> body = new java.util.HashMap<>();
+        body.put("userId", userId);
+        body.put("name", name);
+        body.put("email", email);
+        body.put("phone", phone);
+
+        Map<String, Object> created = customerServiceClient.provision(body, authHeader);
+        if (created != null && created.get("id") != null) {
+            return ((Number) created.get("id")).longValue();
+        }
+        throw new RuntimeException("Failed to auto-provision customer profile");
+    }
 }
