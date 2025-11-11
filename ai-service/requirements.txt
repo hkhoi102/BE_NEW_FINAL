@@ -8,6 +8,7 @@ langchain-text-splitters==0.3.2
 chromadb==0.5.5
 google-generativeai==0.8.3
 pymysql==1.1.1
+cryptography>=41.0.0
 sqlalchemy==2.0.35
 python-dotenv==1.0.1
 pydantic==2.9.2
