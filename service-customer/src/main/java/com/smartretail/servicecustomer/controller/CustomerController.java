@@ -2,11 +2,11 @@ package com.smartretail.servicecustomer.controller;
 
 import com.smartretail.servicecustomer.dto.CustomerDtos;
 import com.smartretail.servicecustomer.service.CustomerService;
+import com.smartretail.servicecustomer.security.JwtTokenProvider;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class CustomerController {
     private final CustomerService customerService;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public CustomerController(CustomerService customerService) { this.customerService = customerService; }
+    public CustomerController(CustomerService customerService, JwtTokenProvider jwtTokenProvider) { this.customerService = customerService; this.jwtTokenProvider = jwtTokenProvider; }
 
     @GetMapping("/health")
     public String health() { return "Customer Service is running!"; }
@@ -39,10 +40,36 @@ public class CustomerController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<CustomerDtos.CustomerInfo> me(Authentication auth) {
-        // email is subject in JWT; in your system, you also include userId claim. For now, resolve by email -> not implemented here.
-        // Recommend client call /by-user/{userId} using claim userId.
-        return ResponseEntity.badRequest().build();
+    public ResponseEntity<java.util.Map<String, Object>> me(@RequestHeader(org.springframework.http.HttpHeaders.AUTHORIZATION) String authHeader) {
+        try {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return ResponseEntity.status(401).build();
+            }
+            String token = authHeader.substring(7);
+            var claims = jwtTokenProvider.validateAndParse(token).getBody();
+
+            Number uidNum = (Number) (claims.get("uid") != null ? claims.get("uid")
+                    : (claims.get("userId") != null ? claims.get("userId")
+                    : (claims.get("user_id") != null ? claims.get("user_id")
+                    : claims.get("id"))));
+            if (uidNum == null) {
+                return ResponseEntity.badRequest().build();
+            }
+            Long userId = uidNum.longValue();
+            var info = customerService.getByUserId(userId);
+            java.util.Map<String, Object> resp = new java.util.HashMap<>();
+            resp.put("id", info.id);
+            resp.put("customerId", info.id); // alias cho Order Service
+            resp.put("userId", info.userId);
+            resp.put("name", info.name);
+            resp.put("phone", info.phone);
+            resp.put("email", info.email);
+            resp.put("address", info.address);
+            resp.put("points", info.points);
+            return ResponseEntity.ok(resp);
+        } catch (Exception ex) {
+            return ResponseEntity.status(401).build();
+        }
     }
 
     @GetMapping
