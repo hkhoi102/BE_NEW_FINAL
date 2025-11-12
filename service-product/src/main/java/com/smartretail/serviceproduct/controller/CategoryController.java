@@ -1,9 +1,11 @@
 package com.smartretail.serviceproduct.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smartretail.serviceproduct.dto.ProductCategoryDto;
-import com.smartretail.serviceproduct.service.ProductCategoryService;
 import com.smartretail.serviceproduct.service.ImageService;
+import com.smartretail.serviceproduct.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,9 @@ public class CategoryController {
     @Autowired
     private ImageService imageService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     // POST /api/categories - Create new category
     @PostMapping
     public ResponseEntity<?> createCategory(@RequestBody ProductCategoryDto categoryDto) {
@@ -40,6 +45,68 @@ public class CategoryController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "Error creating category: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    // PUT /api/categories/{id} - Update category with optional image via multipart/form-data
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateCategoryWithImage(
+            @PathVariable Long id,
+            @RequestParam("data") String categoryJson,
+            @RequestParam(value = "image", required = false) MultipartFile image) {
+        try {
+            ProductCategoryDto categoryDto = objectMapper.readValue(categoryJson, ProductCategoryDto.class);
+
+            Optional<ProductCategoryDto> existingCategory = categoryService.getCategoryById(id);
+            if (!existingCategory.isPresent()) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", false);
+                response.put("message", "Category not found with id: " + id);
+                return ResponseEntity.notFound().build();
+            }
+
+            ProductCategoryDto currentCategory = existingCategory.get();
+
+            if (categoryDto.getName() == null || categoryDto.getName().trim().isEmpty()) {
+                categoryDto.setName(currentCategory.getName());
+            }
+            if (categoryDto.getDescription() == null) {
+                categoryDto.setDescription(currentCategory.getDescription());
+            }
+
+            String existingImageUrl = currentCategory.getImageUrl();
+            if (image != null && !image.isEmpty()) {
+                if (existingImageUrl != null && !existingImageUrl.trim().isEmpty()) {
+                    try {
+                        imageService.deleteProductImage(existingImageUrl);
+                    } catch (Exception e) {
+                        System.err.println("Không thể xóa ảnh cũ: " + e.getMessage());
+                    }
+                }
+                String newImagePath = imageService.uploadProductImage(image);
+                categoryDto.setImageUrl(newImagePath);
+            } else {
+                categoryDto.setImageUrl(existingImageUrl);
+            }
+
+            Optional<ProductCategoryDto> updatedCategory = categoryService.updateCategory(id, categoryDto);
+            if (updatedCategory.isPresent()) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", true);
+                response.put("message", "Category updated successfully");
+                response.put("data", updatedCategory.get());
+                return ResponseEntity.ok(response);
+            } else {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", false);
+                response.put("message", "Unable to update category");
+                return ResponseEntity.badRequest().body(response);
+            }
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Error updating category with image: " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
@@ -87,7 +154,7 @@ public class CategoryController {
     }
 
     // PUT /api/categories/{id} - Update category
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody ProductCategoryDto categoryDto) {
         try {
             Optional<ProductCategoryDto> updatedCategory = categoryService.updateCategory(id, categoryDto);

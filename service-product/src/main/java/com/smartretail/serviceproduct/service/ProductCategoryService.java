@@ -51,15 +51,19 @@ public class ProductCategoryService {
         if (existingCategory.isPresent()) {
             ProductCategory category = existingCategory.get();
 
+            String updatedName = categoryDto.getName() != null ? categoryDto.getName() : category.getName();
+            String updatedDescription = categoryDto.getDescription() != null ? categoryDto.getDescription() : category.getDescription();
+            String updatedImageUrl = categoryDto.getImageUrl() != null ? categoryDto.getImageUrl() : category.getImageUrl();
+
             // Check if name is being changed and if it conflicts with existing names
-            if (!category.getName().equals(categoryDto.getName()) &&
-                categoryRepository.existsByName(categoryDto.getName())) {
-                throw new RuntimeException("Category with name '" + categoryDto.getName() + "' already exists");
+            if (!category.getName().equals(updatedName) &&
+                categoryRepository.existsByName(updatedName)) {
+                throw new RuntimeException("Category with name '" + updatedName + "' already exists");
             }
 
-            category.setName(categoryDto.getName());
-            category.setDescription(categoryDto.getDescription());
-            category.setImageUrl(categoryDto.getImageUrl());
+            category.setName(updatedName);
+            category.setDescription(updatedDescription);
+            category.setImageUrl(updatedImageUrl);
 
             ProductCategory updatedCategory = categoryRepository.save(category);
             return Optional.of(convertToDto(updatedCategory));

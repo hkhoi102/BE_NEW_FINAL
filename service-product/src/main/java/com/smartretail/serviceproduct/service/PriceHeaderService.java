@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -148,6 +149,27 @@ public class PriceHeaderService {
                     return true;
                 })
                 .orElse(false);
+    }
+
+    public Optional<PriceHeaderDto> updateHeader(Long headerId, PriceHeaderDto dto) {
+        return priceHeaderRepository.findById(headerId).map(header -> {
+            String newName = dto.getName() != null ? dto.getName() : header.getName();
+            String newDescription = dto.getDescription() != null ? dto.getDescription() : header.getDescription();
+            LocalDateTime newTimeStart = dto.getTimeStart() != null ? dto.getTimeStart() : header.getTimeStart();
+            LocalDateTime newTimeEnd = dto.getTimeEnd() != null ? dto.getTimeEnd() : header.getTimeEnd();
+            Boolean newActive = dto.getActive() != null ? dto.getActive() : header.getActive();
+
+            validateTimeRange(newTimeStart, newTimeEnd);
+
+            header.setName(newName);
+            header.setDescription(newDescription);
+            header.setTimeStart(newTimeStart);
+            header.setTimeEnd(newTimeEnd);
+            header.setActive(newActive);
+
+            PriceHeader saved = priceHeaderRepository.save(header);
+            return toDto(saved);
+        });
     }
 
     // time window validation retained for header creation/updates

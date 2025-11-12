@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
@@ -36,6 +37,31 @@ public class PriceHeaderController {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
             response.put("message", "Error creating header: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    // PUT /api/products/price-headers/{headerId} - update a price header
+    @PutMapping("/price-headers/{headerId}")
+    public ResponseEntity<?> updateHeader(@PathVariable Long headerId, @RequestBody PriceHeaderDto dto) {
+        try {
+            Optional<PriceHeaderDto> updated = priceHeaderService.updateHeader(headerId, dto);
+            if (updated.isPresent()) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", true);
+                response.put("message", "Price header updated successfully");
+                response.put("data", updated.get());
+                return ResponseEntity.ok(response);
+            } else {
+                Map<String, Object> response = new HashMap<>();
+                response.put("success", false);
+                response.put("message", "Price header not found with id: " + headerId);
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Error updating header: " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
