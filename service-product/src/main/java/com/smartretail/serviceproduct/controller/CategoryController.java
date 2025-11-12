@@ -5,8 +5,8 @@ import com.smartretail.serviceproduct.dto.ProductCategoryDto;
 import com.smartretail.serviceproduct.service.ImageService;
 import com.smartretail.serviceproduct.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,11 +50,14 @@ public class CategoryController {
     }
 
     // PUT /api/categories/{id} - Update category with optional image via multipart/form-data
-    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "/{id}", consumes = {
+            MediaType.MULTIPART_FORM_DATA_VALUE,
+            "multipart/form-data;charset=UTF-8"
+    })
     public ResponseEntity<?> updateCategoryWithImage(
             @PathVariable Long id,
-            @RequestParam("data") String categoryJson,
-            @RequestParam(value = "image", required = false) MultipartFile image) {
+            @RequestPart("data") String categoryJson,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
         try {
             ProductCategoryDto categoryDto = objectMapper.readValue(categoryJson, ProductCategoryDto.class);
 
