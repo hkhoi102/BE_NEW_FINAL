@@ -1,0 +1,126 @@
+{
+  "timestamp": "20251112_120453",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 10,
+    "question_type": "complex_sql",
+    "test_question": "cửa hàng có redbull không"
+  },
+  "statistics": {
+    "total": 10,
+    "success": 10,
+    "failed": 0,
+    "success_rate": 100.0,
+    "latencies_ms": [
+      50496.57320976257,
+      58082.828998565674,
+      13345.838069915771,
+      33043.9019203186,
+      44161.51547431946,
+      13534.70754623413,
+      59942.506551742554,
+      6492.698669433594,
+      33433.62212181091,
+      53899.9547958374
+    ],
+    "min_latency_ms": 6492.698669433594,
+    "max_latency_ms": 59942.506551742554,
+    "avg_latency_ms": 36643.41473579407,
+    "median_latency_ms": 38797.568798065186,
+    "p95_latency_ms": 59942.506551742554,
+    "p99_latency_ms": 59942.506551742554,
+    "std_dev_ms": 19882.517567968684
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "question": "cửa hàng có những sản phẩm nước ngọt nào",
+      "latency_ms": 50496.57320976257,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 373
+    },
+    {
+      "request_id": 2,
+      "question": "khuyến mãi mua 2 tặng 1 có những sản phẩm nào",
+      "latency_ms": 58082.828998565674,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 280
+    },
+    {
+      "request_id": 3,
+      "question": "tồn kho của redbull là bao nhiêu",
+      "latency_ms": 13345.838069915771,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 241
+    },
+    {
+      "request_id": 4,
+      "question": "khuyến mãi nào đang áp dụng hiện tại",
+      "latency_ms": 33043.9019203186,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 262
+    },
+    {
+      "request_id": 5,
+      "question": "sản phẩm nào bán chạy nhất tháng này",
+      "latency_ms": 44161.51547431946,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 364
+    },
+    {
+      "request_id": 6,
+      "question": "còn bao nhiêu coca trong kho",
+      "latency_ms": 13534.70754623413,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 249
+    },
+    {
+      "request_id": 7,
+      "question": "sản phẩm nào bán chạy nhất tháng này",
+      "latency_ms": 59942.506551742554,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 271
+    },
+    {
+      "request_id": 8,
+      "question": "khuyến mãi mua 2 tặng 1 có những sản phẩm nào",
+      "latency_ms": 6492.698669433594,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 216
+    },
+    {
+      "request_id": 9,
+      "question": "sản phẩm nào còn hàng và đang khuyến mãi",
+      "latency_ms": 33433.62212181091,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 547
+    },
+    {
+      "request_id": 10,
+      "question": "sản phẩm nào bán chạy nhất tháng này",
+      "latency_ms": 53899.9547958374,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 352
+    }
+  ]
+}

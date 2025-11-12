@@ -1,0 +1,126 @@
+{
+  "timestamp": "20251112_120327",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 10,
+    "question_type": "simple",
+    "test_question": "cửa hàng có redbull không"
+  },
+  "statistics": {
+    "total": 10,
+    "success": 10,
+    "failed": 0,
+    "success_rate": 100.0,
+    "latencies_ms": [
+      15357.083320617676,
+      12532.690525054932,
+      13442.856311798096,
+      10072.339057922363,
+      13439.493656158447,
+      20600.56185722351,
+      4582.177639007568,
+      11994.281768798828,
+      20307.470560073853,
+      20016.233205795288
+    ],
+    "min_latency_ms": 4582.177639007568,
+    "max_latency_ms": 20600.56185722351,
+    "avg_latency_ms": 14234.518790245056,
+    "median_latency_ms": 13441.174983978271,
+    "p95_latency_ms": 20600.56185722351,
+    "p99_latency_ms": 20600.56185722351,
+    "std_dev_ms": 5074.563209021839
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 15357.083320617676,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 2,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 12532.690525054932,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 330
+    },
+    {
+      "request_id": 3,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13442.856311798096,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 4,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 10072.339057922363,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 195
+    },
+    {
+      "request_id": 5,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13439.493656158447,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 6,
+      "question": "còn pepsi không",
+      "latency_ms": 20600.56185722351,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 189
+    },
+    {
+      "request_id": 7,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 4582.177639007568,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 330
+    },
+    {
+      "request_id": 8,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 11994.281768798828,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 9,
+      "question": "còn pepsi không",
+      "latency_ms": 20307.470560073853,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 189
+    },
+    {
+      "request_id": 10,
+      "question": "còn pepsi không",
+      "latency_ms": 20016.233205795288,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 190
+    }
+  ]
+}

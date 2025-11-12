@@ -53,7 +53,21 @@ async def lifespan(app: FastAPI):
 	embeddings = get_embeddings()
 	os.makedirs(CHROMA_DIR, exist_ok=True)
 	vectorstore = Chroma(embedding_function=embeddings, persist_directory=CHROMA_DIR)
-	retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 4})
+
+	# Tự động load documents nếu vectorstore rỗng và có file trong DOCS_DIR
+	try:
+		collection = vectorstore._collection
+		if collection and hasattr(collection, 'count') and collection.count() == 0:
+			# Kiểm tra xem có file trong DOCS_DIR không
+			if os.path.exists(DOCS_DIR) and os.listdir(DOCS_DIR):
+				print(f"📚 Phát hiện vectorstore rỗng, đang tự động load documents từ {DOCS_DIR}...")
+				count = upsert_documents(None)  # None = load từ DOCS_DIR
+				print(f"✅ Đã load {count} chunks vào vectorstore")
+	except Exception as e:
+		print(f"⚠️ Không thể tự động load documents: {e}")
+		print("⚠️ Vui lòng gọi API /ingest để load documents thủ công")
+
+	retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 6})
 
 	# Fixed system prompt for SQL Agent
 	AGENT_PREFIX = """
@@ -118,7 +132,11 @@ Final Answer: Hiện có 2 sản phẩm còn hàng đang khuyến mãi: Coca-Col
 🚨 QUY TẮC NGHIÊM NGẶT VỀ DỮ LIỆU:
 1. CHỈ sử dụng dữ liệu TRỰC TIẾP từ kết quả truy vấn SQL
 2. KHÔNG BAO GIỜ thêm thông tin, suy luận, hoặc dùng kiến thức ngoài kết quả DB
-3. Nếu SQL trả về RỖNG/NULL → Trả lời một cách thân thiện: "Xin lỗi, hiện tại chúng tôi không có sản phẩm này trong hệ thống" hoặc "Hiện tại không tìm thấy thông tin này"
+3. PHÂN BIỆT QUAN TRỌNG - Sản phẩm không tồn tại vs Hết hàng:
+   - Nếu query product_db.products KHÔNG tìm thấy sản phẩm → "Xin lỗi, hiện tại chúng tôi không có sản phẩm này trong hệ thống"
+   - Nếu query product_db.products TÌM THẤY sản phẩm NHƯNG available_quantity = 0 hoặc NULL → "Xin lỗi, sản phẩm này hiện đang hết hàng"
+   - Khi kiểm tra tồn kho, LUÔN JOIN với inventory_db.stock_balance để lấy available_quantity
+   - Nếu available_quantity = 0 hoặc NULL → Báo "hết hàng", KHÔNG báo "không có trong hệ thống"
 4. Nếu SQL có dữ liệu → Trả lời ĐÚNG với số liệu trong kết quả, KHÔNG làm tròn, KHÔNG ước lượng
 
 💬 HƯỚNG DẪN TRẢ LỜI TỰ NHIÊN:
@@ -160,11 +178,12 @@ VD: "Mua 2 Coca-Cola (Lon) tặng 1 Coca-Cola (Lon)"
   → Hiển thị format: "Tên sản phẩm (Tên đơn vị)" thay vì ID
 
 📦 TỒN KHO - Query đơn giản:
-- SELECT p.name, u.name AS unit, SUM(sb.quantity) AS qty
+- SELECT p.name, u.name AS unit, COALESCE(SUM(sb.available_quantity), 0) AS qty
 - FROM product_db.products p JOIN product_db.product_units pu ON p.id = pu.product_id
 - JOIN product_db.units u ON pu.unit_id = u.id
 - LEFT JOIN inventory_db.stock_balance sb ON pu.id = sb.product_unit_id
 - WHERE p.name LIKE '%tên_sản_phẩm%' GROUP BY p.name, u.name LIMIT 20
+- QUAN TRỌNG: Nếu qty = 0 → Báo "sản phẩm hết hàng", KHÔNG báo "không có trong hệ thống"
 
 💰 GIÁ BÁN - Query đơn giản:
 - SELECT p.name, u.name AS unit, pl.price
@@ -312,11 +331,13 @@ def load_and_split(paths: Optional[List[str]] = None):
     if paths:
         for p in paths:
             if os.path.isdir(p):
-                documents.extend(DirectoryLoader(p, glob='**/*', loader_cls=TextLoader, show_progress=True).load())
+                # Sử dụng TextLoader với encoding UTF-8
+                documents.extend(DirectoryLoader(p, glob='**/*', loader_cls=TextLoader, loader_kwargs={'encoding': 'utf-8'}, show_progress=True).load())
             elif os.path.isfile(p):
-                documents.extend(TextLoader(p).load())
+                documents.extend(TextLoader(p, encoding='utf-8').load())
     else:
-        documents.extend(DirectoryLoader(DOCS_DIR, glob='**/*', loader_cls=TextLoader, show_progress=True).load())
+        # Sử dụng TextLoader với encoding UTF-8
+        documents.extend(DirectoryLoader(DOCS_DIR, glob='**/*', loader_cls=TextLoader, loader_kwargs={'encoding': 'utf-8'}, show_progress=True).load())
     return text_splitter.split_documents(documents)
 
 
@@ -532,6 +553,11 @@ RAG_PROMPT = PromptTemplate.from_template(
 def ingest(req: IngestRequest) -> Dict[str, Any]:
     try:
         count = upsert_documents(req.paths)
+        # Reload retriever để sử dụng vectorstore mới nhất
+        vs = ensure_vectorstore()
+        retriever = vs.as_retriever(search_type="similarity", search_kwargs={"k": 6})
+        GLOBALS["vectorstore"] = vs
+        GLOBALS["retriever"] = retriever
         return {"indexed_chunks": count, "persist_directory": CHROMA_DIR}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

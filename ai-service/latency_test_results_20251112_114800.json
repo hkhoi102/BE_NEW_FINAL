@@ -1,0 +1,97 @@
+{
+  "timestamp": "20251112_114800",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 10,
+    "test_question": "cửa hàng có redbull không"
+  },
+  "statistics": {
+    "total": 10,
+    "success": 0,
+    "failed": 10,
+    "success_rate": 0.0,
+    "error": "Không có request nào thành công"
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "latency_ms": 2306.830406188965,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 2,
+      "latency_ms": 2306.830406188965,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 3,
+      "latency_ms": 2306.830406188965,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 4,
+      "latency_ms": 2305.309772491455,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 5,
+      "latency_ms": 2320.491313934326,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 6,
+      "latency_ms": 2305.309772491455,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 7,
+      "latency_ms": 2306.830406188965,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 8,
+      "latency_ms": 2306.830406188965,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 9,
+      "latency_ms": 2304.3012619018555,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    },
+    {
+      "request_id": 10,
+      "latency_ms": 2305.8218955993652,
+      "status_code": 0,
+      "success": false,
+      "error": "Cannot connect to host localhost:8000 ssl:default [The remote computer refused the network connection]",
+      "response_size": 0
+    }
+  ]
+}

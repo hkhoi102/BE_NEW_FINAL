@@ -1,0 +1,126 @@
+{
+  "timestamp": "20251112_120947",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 10,
+    "question_type": "complex_natural_language",
+    "test_question": "cửa hàng có redbull không"
+  },
+  "statistics": {
+    "total": 10,
+    "success": 10,
+    "failed": 0,
+    "success_rate": 100.0,
+    "latencies_ms": [
+      38989.63451385498,
+      21265.41256904602,
+      37564.72420692444,
+      26163.09642791748,
+      11928.540229797363,
+      30709.29455757141,
+      5454.366207122803,
+      27355.482816696167,
+      35080.78980445862,
+      24641.070127487183
+    ],
+    "min_latency_ms": 5454.366207122803,
+    "max_latency_ms": 38989.63451385498,
+    "avg_latency_ms": 25915.241146087646,
+    "median_latency_ms": 26759.289622306824,
+    "p95_latency_ms": 38989.63451385498,
+    "p99_latency_ms": 38989.63451385498,
+    "std_dev_ms": 10818.172979460094
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "question": "tôi cần biết thông tin về tồn kho và giá bán của các sản phẩm nước ngọt",
+      "latency_ms": 38989.63451385498,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 1185
+    },
+    {
+      "request_id": 2,
+      "question": "có những ưu đãi nào đặc biệt cho khách hàng hôm nay không",
+      "latency_ms": 21265.41256904602,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 239
+    },
+    {
+      "request_id": 3,
+      "question": "tôi cần biết thông tin về tồn kho và giá bán của các sản phẩm nước ngọt",
+      "latency_ms": 37564.72420692444,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 4,
+      "question": "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+      "latency_ms": 26163.09642791748,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 288
+    },
+    {
+      "request_id": 5,
+      "question": "có những ưu đãi nào đặc biệt cho khách hàng hôm nay không",
+      "latency_ms": 11928.540229797363,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 325
+    },
+    {
+      "request_id": 6,
+      "question": "cho tôi biết những sản phẩm đang được khuyến mãi và còn hàng trong kho",
+      "latency_ms": 30709.29455757141,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 274
+    },
+    {
+      "request_id": 7,
+      "question": "bạn có thể liệt kê các chương trình mua tặng đang diễn ra không",
+      "latency_ms": 5454.366207122803,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 232
+    },
+    {
+      "request_id": 8,
+      "question": "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+      "latency_ms": 27355.482816696167,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 288
+    },
+    {
+      "request_id": 9,
+      "question": "cho tôi biết những sản phẩm đang được khuyến mãi và còn hàng trong kho",
+      "latency_ms": 35080.78980445862,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 274
+    },
+    {
+      "request_id": 10,
+      "question": "bạn có thể tư vấn cho tôi về các sản phẩm đang có chương trình khuyến mãi không",
+      "latency_ms": 24641.070127487183,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 258
+    }
+  ]
+}

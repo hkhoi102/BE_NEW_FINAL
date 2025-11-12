@@ -1,0 +1,115 @@
+{
+  "timestamp": "20251112_115310",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 10,
+    "test_question": "cửa hàng có coca không"
+  },
+  "statistics": {
+    "total": 10,
+    "success": 10,
+    "failed": 0,
+    "success_rate": 100.0,
+    "latencies_ms": [
+      40944.65613365173,
+      13648.187637329102,
+      41930.85312843323,
+      39859.36713218689,
+      13629.619836807251,
+      13590.30818939209,
+      41903.44953536987,
+      39166.08476638794,
+      13688.079833984375,
+      11522.617101669312
+    ],
+    "min_latency_ms": 11522.617101669312,
+    "max_latency_ms": 41930.85312843323,
+    "avg_latency_ms": 26988.32232952118,
+    "median_latency_ms": 26427.082300186157,
+    "p95_latency_ms": 41930.85312843323,
+    "p99_latency_ms": 41930.85312843323,
+    "std_dev_ms": 14554.44410635477
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "latency_ms": 40944.65613365173,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 2,
+      "latency_ms": 13648.187637329102,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 3,
+      "latency_ms": 41930.85312843323,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 4,
+      "latency_ms": 39859.36713218689,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 5,
+      "latency_ms": 13629.619836807251,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 6,
+      "latency_ms": 13590.30818939209,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 7,
+      "latency_ms": 41903.44953536987,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 8,
+      "latency_ms": 39166.08476638794,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 9,
+      "latency_ms": 13688.079833984375,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 10,
+      "latency_ms": 11522.617101669312,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    }
+  ]
+}

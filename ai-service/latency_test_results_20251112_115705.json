@@ -1,0 +1,295 @@
+{
+  "timestamp": "20251112_115705",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 30,
+    "test_question": "cửa hàng có coca không"
+  },
+  "statistics": {
+    "total": 30,
+    "success": 30,
+    "failed": 0,
+    "success_rate": 100.0,
+    "latencies_ms": [
+      40905.95269203186,
+      12977.778911590576,
+      40916.96810722351,
+      13907.865047454834,
+      14182.801723480225,
+      12765.33555984497,
+      11712.807655334473,
+      14006.930589675903,
+      40295.50075531006,
+      12373.646020889282,
+      41370.47624588013,
+      40640.27762413025,
+      42990.37146568298,
+      40569.04339790344,
+      41462.10265159607,
+      12287.75429725647,
+      12428.35807800293,
+      40892.20643043518,
+      41447.850704193115,
+      11943.26663017273,
+      12640.773057937622,
+      12854.031562805176,
+      41345.63231468201,
+      39495.36633491516,
+      13978.009462356567,
+      11834.72204208374,
+      40411.19408607483,
+      40340.33226966858,
+      41430.992126464844,
+      13086.774349212646
+    ],
+    "min_latency_ms": 11712.807655334473,
+    "max_latency_ms": 42990.37146568298,
+    "avg_latency_ms": 26916.504073143005,
+    "median_latency_ms": 26839.084029197693,
+    "p95_latency_ms": 41462.10265159607,
+    "p99_latency_ms": 42990.37146568298,
+    "std_dev_ms": 14313.237219779938
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "latency_ms": 40905.95269203186,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 2,
+      "latency_ms": 12977.778911590576,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 3,
+      "latency_ms": 40916.96810722351,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 4,
+      "latency_ms": 13907.865047454834,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 5,
+      "latency_ms": 14182.801723480225,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 6,
+      "latency_ms": 12765.33555984497,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 7,
+      "latency_ms": 11712.807655334473,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 8,
+      "latency_ms": 14006.930589675903,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 9,
+      "latency_ms": 40295.50075531006,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 10,
+      "latency_ms": 12373.646020889282,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 11,
+      "latency_ms": 41370.47624588013,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 12,
+      "latency_ms": 40640.27762413025,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 13,
+      "latency_ms": 42990.37146568298,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 14,
+      "latency_ms": 40569.04339790344,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 15,
+      "latency_ms": 41462.10265159607,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 16,
+      "latency_ms": 12287.75429725647,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 17,
+      "latency_ms": 12428.35807800293,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 18,
+      "latency_ms": 40892.20643043518,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 19,
+      "latency_ms": 41447.850704193115,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 20,
+      "latency_ms": 11943.26663017273,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 21,
+      "latency_ms": 12640.773057937622,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 22,
+      "latency_ms": 12854.031562805176,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 23,
+      "latency_ms": 41345.63231468201,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 24,
+      "latency_ms": 39495.36633491516,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 25,
+      "latency_ms": 13978.009462356567,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 26,
+      "latency_ms": 11834.72204208374,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 27,
+      "latency_ms": 40411.19408607483,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 28,
+      "latency_ms": 40340.33226966858,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 29,
+      "latency_ms": 41430.992126464844,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 30,
+      "latency_ms": 13086.774349212646,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    }
+  ]
+}

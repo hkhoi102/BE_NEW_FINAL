@@ -1,0 +1,326 @@
+{
+  "timestamp": "20251112_121838",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 30,
+    "question_type": "complex_natural_language",
+    "test_question": "cửa hàng có redbull không"
+  },
+  "statistics": {
+    "total": 30,
+    "success": 30,
+    "failed": 0,
+    "success_rate": 100.0,
+    "latencies_ms": [
+      107829.19573783875,
+      32109.931707382202,
+      30084.05065536499,
+      38155.01308441162,
+      19323.617696762085,
+      41364.97473716736,
+      27773.850917816162,
+      26294.69108581543,
+      30021.37517929077,
+      34506.53052330017,
+      40713.16432952881,
+      37646.81339263916,
+      42314.83745574951,
+      9241.518259048462,
+      27552.505016326904,
+      45456.16102218628,
+      36645.95627784729,
+      45155.3168296814,
+      66820.68514823914,
+      39990.29064178467,
+      26961.794137954712,
+      33559.454917907715,
+      38785.120487213135,
+      29745.420217514038,
+      27087.775230407715,
+      10375.495910644531,
+      19394.58394050598,
+      37357.29455947876,
+      25497.642278671265,
+      119511.36445999146
+    ],
+    "min_latency_ms": 9241.518259048462,
+    "max_latency_ms": 119511.36445999146,
+    "avg_latency_ms": 38242.54752794901,
+    "median_latency_ms": 34032.99272060394,
+    "p95_latency_ms": 107829.19573783875,
+    "p99_latency_ms": 119511.36445999146,
+    "std_dev_ms": 23337.35126418627
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "question": "tôi muốn biết những sản phẩm nào đang được bán với giá tốt và còn nhiều hàng trong kho",
+      "latency_ms": 107829.19573783875,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 634
+    },
+    {
+      "request_id": 2,
+      "question": "có chương trình mua x tặng y nào đang áp dụng cho các sản phẩm còn hàng không",
+      "latency_ms": 32109.931707382202,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 309
+    },
+    {
+      "request_id": 3,
+      "question": "tôi cần biết thông tin về tồn kho và giá bán của các sản phẩm nước ngọt",
+      "latency_ms": 30084.05065536499,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 484
+    },
+    {
+      "request_id": 4,
+      "question": "sản phẩm nào đang được giảm giá và vẫn còn hàng để mua",
+      "latency_ms": 38155.01308441162,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 253
+    },
+    {
+      "request_id": 5,
+      "question": "tôi muốn mua nước ngọt, bạn có thể cho tôi biết giá và số lượng còn lại không",
+      "latency_ms": 19323.617696762085,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 350
+    },
+    {
+      "request_id": 6,
+      "question": "sản phẩm nào đang được giảm giá và vẫn còn hàng để mua",
+      "latency_ms": 41364.97473716736,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 288
+    },
+    {
+      "request_id": 7,
+      "question": "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+      "latency_ms": 27773.850917816162,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 287
+    },
+    {
+      "request_id": 8,
+      "question": "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+      "latency_ms": 26294.69108581543,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 271
+    },
+    {
+      "request_id": 9,
+      "question": "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+      "latency_ms": 30021.37517929077,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 271
+    },
+    {
+      "request_id": 10,
+      "question": "có chương trình mua x tặng y nào đang áp dụng cho các sản phẩm còn hàng không",
+      "latency_ms": 34506.53052330017,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 337
+    },
+    {
+      "request_id": 11,
+      "question": "tôi muốn biết những sản phẩm nào đang được bán với giá tốt và còn nhiều hàng trong kho",
+      "latency_ms": 40713.16432952881,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 410
+    },
+    {
+      "request_id": 12,
+      "question": "tôi muốn biết những sản phẩm nào đang được bán với giá tốt và còn nhiều hàng trong kho",
+      "latency_ms": 37646.81339263916,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 390
+    },
+    {
+      "request_id": 13,
+      "question": "có những ưu đãi nào đặc biệt cho khách hàng hôm nay không",
+      "latency_ms": 42314.83745574951,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 333
+    },
+    {
+      "request_id": 14,
+      "question": "có những ưu đãi nào đặc biệt cho khách hàng hôm nay không",
+      "latency_ms": 9241.518259048462,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 327
+    },
+    {
+      "request_id": 15,
+      "question": "tôi cần biết thông tin về tồn kho và giá bán của các sản phẩm nước ngọt",
+      "latency_ms": 27552.505016326904,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 1108
+    },
+    {
+      "request_id": 16,
+      "question": "bạn có thể liệt kê các chương trình mua tặng đang diễn ra không",
+      "latency_ms": 45456.16102218628,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 254
+    },
+    {
+      "request_id": 17,
+      "question": "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+      "latency_ms": 36645.95627784729,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 288
+    },
+    {
+      "request_id": 18,
+      "question": "tôi muốn biết những sản phẩm nào đang được bán với giá tốt và còn nhiều hàng trong kho",
+      "latency_ms": 45155.3168296814,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 410
+    },
+    {
+      "request_id": 19,
+      "question": "tôi cần biết thông tin về tồn kho và giá bán của các sản phẩm nước ngọt",
+      "latency_ms": 66820.68514823914,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 1112
+    },
+    {
+      "request_id": 20,
+      "question": "sản phẩm nào đang được giảm giá và vẫn còn hàng để mua",
+      "latency_ms": 39990.29064178467,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 289
+    },
+    {
+      "request_id": 21,
+      "question": "có chương trình mua x tặng y nào đang áp dụng cho các sản phẩm còn hàng không",
+      "latency_ms": 26961.794137954712,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 297
+    },
+    {
+      "request_id": 22,
+      "question": "tôi muốn biết những sản phẩm nào đang được bán với giá tốt và còn nhiều hàng trong kho",
+      "latency_ms": 33559.454917907715,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 255
+    },
+    {
+      "request_id": 23,
+      "question": "tôi muốn biết những sản phẩm nào đang được bán với giá tốt và còn nhiều hàng trong kho",
+      "latency_ms": 38785.120487213135,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 410
+    },
+    {
+      "request_id": 24,
+      "question": "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+      "latency_ms": 29745.420217514038,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 272
+    },
+    {
+      "request_id": 25,
+      "question": "bạn có thể liệt kê các chương trình mua tặng đang diễn ra không",
+      "latency_ms": 27087.775230407715,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 273
+    },
+    {
+      "request_id": 26,
+      "question": "bạn có thể liệt kê các chương trình mua tặng đang diễn ra không",
+      "latency_ms": 10375.495910644531,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 253
+    },
+    {
+      "request_id": 27,
+      "question": "tôi muốn mua nước ngọt, bạn có thể cho tôi biết giá và số lượng còn lại không",
+      "latency_ms": 19394.58394050598,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 351
+    },
+    {
+      "request_id": 28,
+      "question": "bạn có thể tư vấn cho tôi về các sản phẩm đang có chương trình khuyến mãi không",
+      "latency_ms": 37357.29455947876,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 258
+    },
+    {
+      "request_id": 29,
+      "question": "bạn có thể tư vấn cho tôi về các sản phẩm đang có chương trình khuyến mãi không",
+      "latency_ms": 25497.642278671265,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 259
+    },
+    {
+      "request_id": 30,
+      "question": "bạn có thể tư vấn cho tôi về các sản phẩm đang có chương trình khuyến mãi không",
+      "latency_ms": 119511.36445999146,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 116
+    }
+  ]
+}

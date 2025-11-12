@@ -1,0 +1,326 @@
+{
+  "timestamp": "20251112_121230",
+  "config": {
+    "api_url": "http://localhost:8000/chat",
+    "num_requests": 30,
+    "question_type": "simple",
+    "test_question": "cửa hàng có redbull không"
+  },
+  "statistics": {
+    "total": 30,
+    "success": 30,
+    "failed": 0,
+    "success_rate": 100.0,
+    "latencies_ms": [
+      14113.63673210144,
+      12700.74462890625,
+      12246.564149856567,
+      13590.070486068726,
+      23713.282108306885,
+      4773.104190826416,
+      19886.61241531372,
+      12161.198854446411,
+      4043.233633041382,
+      10726.00269317627,
+      10811.392545700073,
+      4787.332773208618,
+      13880.879402160645,
+      3787.8739833831787,
+      13079.741954803467,
+      19894.853115081787,
+      13787.14108467102,
+      13226.832866668701,
+      14711.873531341553,
+      3712.3515605926514,
+      13974.45797920227,
+      13188.040971755981,
+      14768.714427947998,
+      13629.130601882935,
+      11968.94121170044,
+      13900.132179260254,
+      12428.820848464966,
+      23721.32682800293,
+      4373.523712158203,
+      13789.161443710327
+    ],
+    "min_latency_ms": 3712.3515605926514,
+    "max_latency_ms": 23721.32682800293,
+    "avg_latency_ms": 12512.565763791403,
+    "median_latency_ms": 13207.436919212341,
+    "p95_latency_ms": 23713.282108306885,
+    "p99_latency_ms": 23721.32682800293,
+    "std_dev_ms": 5262.347100577668
+  },
+  "results": [
+    {
+      "request_id": 1,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 14113.63673210144,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 277
+    },
+    {
+      "request_id": 2,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 12700.74462890625,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 196
+    },
+    {
+      "request_id": 3,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 12246.564149856567,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 195
+    },
+    {
+      "request_id": 4,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13590.070486068726,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 341
+    },
+    {
+      "request_id": 5,
+      "question": "còn pepsi không",
+      "latency_ms": 23713.282108306885,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 189
+    },
+    {
+      "request_id": 6,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 4773.104190826416,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 330
+    },
+    {
+      "request_id": 7,
+      "question": "còn pepsi không",
+      "latency_ms": 19886.61241531372,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 193
+    },
+    {
+      "request_id": 8,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 12161.198854446411,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 195
+    },
+    {
+      "request_id": 9,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 4043.233633041382,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 330
+    },
+    {
+      "request_id": 10,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 10726.00269317627,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 196
+    },
+    {
+      "request_id": 11,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 10811.392545700073,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 197
+    },
+    {
+      "request_id": 12,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 4787.332773208618,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 13,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 13880.879402160645,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 278
+    },
+    {
+      "request_id": 14,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 3787.8739833831787,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 15,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13079.741954803467,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 16,
+      "question": "còn pepsi không",
+      "latency_ms": 19894.853115081787,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 194
+    },
+    {
+      "request_id": 17,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13787.14108467102,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 18,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13226.832866668701,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 342
+    },
+    {
+      "request_id": 19,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 14711.873531341553,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 20,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 3712.3515605926514,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 21,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 13974.45797920227,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 22,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13188.040971755981,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 23,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 14768.714427947998,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 24,
+      "question": "cửa hàng có coca không",
+      "latency_ms": 13629.130601882935,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 332
+    },
+    {
+      "request_id": 25,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 11968.94121170044,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 196
+    },
+    {
+      "request_id": 26,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 13900.132179260254,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 278
+    },
+    {
+      "request_id": 27,
+      "question": "cửa hàng có redbull không",
+      "latency_ms": 12428.820848464966,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 197
+    },
+    {
+      "request_id": 28,
+      "question": "còn pepsi không",
+      "latency_ms": 23721.32682800293,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 190
+    },
+    {
+      "request_id": 29,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 4373.523712158203,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 331
+    },
+    {
+      "request_id": 30,
+      "question": "giá bán của coca là bao nhiêu",
+      "latency_ms": 13789.161443710327,
+      "status_code": 200,
+      "success": true,
+      "error": "",
+      "response_size": 278
+    }
+  ]
+}

@@ -13,3 +13,4 @@ sqlalchemy==2.0.35
 python-dotenv==1.0.1
 pydantic==2.9.2
 langsmith==0.1.135
+aiohttp==3.9.1

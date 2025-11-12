@@ -1,0 +1,50 @@
+{
+  "simple": [
+    "cửa hàng có redbull không",
+    "cửa hàng có coca không",
+    "còn pepsi không",
+    "giá bán của coca là bao nhiêu"
+  ],
+  "complex_sql": [
+    "sản phẩm nào còn hàng và đang khuyến mãi",
+    "mua x tặng y có gì",
+    "khuyến mãi nào đang áp dụng hiện tại",
+    "sản phẩm nào bán chạy nhất tháng này",
+    "tồn kho của redbull là bao nhiêu",
+    "cửa hàng có những sản phẩm nước ngọt nào",
+    "sản phẩm nào có giá dưới 20000",
+    "còn bao nhiêu coca trong kho",
+    "khuyến mãi mua 2 tặng 1 có những sản phẩm nào",
+    "sản phẩm nào vừa còn hàng vừa đang giảm giá"
+  ],
+  "complex_natural_language": [
+    "cho tôi biết những sản phẩm đang được khuyến mãi và còn hàng trong kho",
+    "bạn có thể liệt kê các chương trình mua tặng đang diễn ra không",
+    "tôi muốn mua nước ngọt, bạn có thể cho tôi biết giá và số lượng còn lại không",
+    "có những ưu đãi nào đặc biệt cho khách hàng hôm nay không",
+    "sản phẩm nào đang được giảm giá và vẫn còn hàng để mua",
+    "tôi cần biết thông tin về tồn kho và giá bán của các sản phẩm nước ngọt",
+    "bạn có thể tư vấn cho tôi về các sản phẩm đang có chương trình khuyến mãi không",
+    "cho tôi xem danh sách sản phẩm vừa có trong hệ thống vừa còn hàng và đang được giảm giá",
+    "tôi muốn biết những sản phẩm nào đang được bán với giá tốt và còn nhiều hàng trong kho",
+    "có chương trình mua x tặng y nào đang áp dụng cho các sản phẩm còn hàng không"
+  ],
+  "rag_questions": [
+    "chính sách đổi trả hàng như thế nào",
+    "cách thức thanh toán tại cửa hàng",
+    "thời gian mở cửa của siêu thị",
+    "quy định về khuyến mãi và giảm giá",
+    "hướng dẫn sử dụng hệ thống đặt hàng online"
+  ],
+  "mixed_complexity": [
+    "cửa hàng có redbull không",
+    "sản phẩm nào còn hàng và đang khuyến mãi",
+    "cho tôi biết những sản phẩm đang được khuyến mãi và còn hàng trong kho",
+    "mua x tặng y có gì",
+    "tôi muốn mua nước ngọt, bạn có thể cho tôi biết giá và số lượng còn lại không",
+    "khuyến mãi nào đang áp dụng hiện tại",
+    "còn bao nhiêu coca trong kho",
+    "bạn có thể tư vấn cho tôi về các sản phẩm đang có chương trình khuyến mãi không"
+  ]
+}
+
