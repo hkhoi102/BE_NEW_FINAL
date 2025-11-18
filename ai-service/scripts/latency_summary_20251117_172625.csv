@@ -1,0 +1,4 @@
+question,runs,fallback_runs,routes,avg_llm_ms,p95_llm_ms,avg_sql_ms,p95_sql_ms,avg_total_http_ms,p95_total_http_ms
+có coca không,5,1,sql:4; sql_fallback:1,15658.5,17295.33,3.06,3.63,14441.49,18157.37
+còn coca trong kho không,5,0,sql:5,15341.33,26051.1,2.81,3.15,15344.53,26054.97
+địa chỉ cửa hàng ở đâu,5,0,rag:5,,,,,3249.79,5941.02

@@ -1,0 +1,16 @@
+question,run,route,llm_reasoning_ms,sql_execution_ms,total_http_ms
+có coca không,1,sql,17489.58,2.76,18647.362
+có coca không,2,sql,14989.05,3.15,14992.315
+có coca không,3,sql,13960.8,2.62,13964.037
+có coca không,4,sql,16194.56,3.71,16197.417000000001
+có coca không,5,sql_fallback,,,8406.342999999999
+còn coca trong kho không,1,sql,28751.26,3.2,28755.125
+còn coca trong kho không,2,sql,15250.46,2.94,15254.364000000001
+còn coca trong kho không,3,sql,13174.34,2.85,13177.427
+còn coca trong kho không,4,sql,5254.59,2.54,5257.67
+còn coca trong kho không,5,sql,14276.01,2.54,14278.061
+địa chỉ cửa hàng ở đâu,1,rag,,,2468.804
+địa chỉ cửa hàng ở đâu,2,rag,,,2350.37
+địa chỉ cửa hàng ở đâu,3,rag,,,2245.619
+địa chỉ cửa hàng ở đâu,4,rag,,,2375.0930000000003
+địa chỉ cửa hàng ở đâu,5,rag,,,6809.078
