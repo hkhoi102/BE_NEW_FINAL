@@ -350,38 +350,35 @@ public class PromotionCalculationService {
     }
 
     /**
-     * Tính giảm giá mua X tặng Y
+     * Tính khuyến mãi mua X tặng Y.
+     *
+     * YÊU CẦU MỚI:
+     * - totalDiscountAmount KHÔNG được tính giá trị phần quà Y.
+     * - Khuyến mãi này chỉ thêm quà vào danh sách giftItems, khách vẫn trả đủ tiền cho
+     *   phần hàng mua (X). Giá trị quà chỉ hiển thị ở UI, không trừ vào tiền phải trả.
      */
     private BigDecimal calculateBuyXGetYDiscount(OrderPromotionResult result, ProductPromotionInfo product, String promotionName, PromotionDetail detail) {
         if (detail.getConditionQuantity() == null || detail.getConditionQuantity() <= 0) {
             return BigDecimal.ZERO;
         }
 
-        // Cách tính theo yêu cầu: nếu mua >= X thì tặng Y (chỉ 1 lần),
-        // tổng quantity khách nhận = quantity + Y, nhưng chỉ tính tiền theo quantity.
+        // Nếu mua đủ điều kiện X thì tặng Y (chỉ 1 lần) nhưng KHÔNG trừ tiền quà vào discount.
         if (product.getQuantity() >= detail.getConditionQuantity()) {
-            int free = detail.getFreeQuantity() != null && detail.getFreeQuantity() > 0 ? detail.getFreeQuantity() : 1;
+            int free = (detail.getFreeQuantity() != null && detail.getFreeQuantity() > 0)
+                    ? detail.getFreeQuantity()
+                    : 1;
 
-            // Nếu có quà tặng là ProductUnit khác, ghi nhận giftItem và tính giảm theo giá của B nếu lấy được
-            BigDecimal unitPriceForDiscount = product.getUnitPrice();
+            // Nếu cấu hình có sản phẩm quà tặng (ProductUnit khác), ghi nhận vào giftItems
             if (detail.getGiftProductUnitId() != null) {
-                // Ghi nhận quà để Order/Preview thêm dòng giá 0
                 result.getGiftItems().add(new GiftItem(detail.getGiftProductUnitId(), free, promotionName));
-                // Thử lấy giá hiện tại của ProductUnit B từ product-service qua API Gateway
-                BigDecimal giftUnitPrice = fetchCurrentUnitPrice(detail.getGiftProductUnitId());
-                if (giftUnitPrice != null) {
-                    unitPriceForDiscount = giftUnitPrice;
-                }
+            } else {
+                // Trường hợp tặng thêm chính sản phẩm đang mua (mua 2 tặng 1 cùng mã),
+                // vẫn chỉ thêm quà logic ở UI, không trừ tiền.
+                result.getGiftItems().add(new GiftItem(product.getProductUnitId(), free, promotionName));
             }
 
-            // Không giảm quá subtotal
-            BigDecimal freeAmount = unitPriceForDiscount.multiply(new BigDecimal(Math.min(free, product.getQuantity())));
-
-            if (detail.getMaxDiscount() != null && freeAmount.compareTo(detail.getMaxDiscount()) > 0) {
-                freeAmount = detail.getMaxDiscount();
-            }
-
-            return freeAmount;
+            // Không cộng gì vào discount -> trả về 0 để totalDiscountAmount không bao gồm giá trị quà.
+            return BigDecimal.ZERO;
         }
 
         return BigDecimal.ZERO;
