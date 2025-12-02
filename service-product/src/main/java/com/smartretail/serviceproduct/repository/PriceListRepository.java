@@ -17,10 +17,13 @@ public interface PriceListRepository extends JpaRepository<PriceList, Long> {
 
     @Query("SELECT p FROM PriceList p LEFT JOIN p.priceHeader h " +
            "WHERE p.productUnit.id = :productUnitId AND p.active = true " +
-           "AND (h IS NULL OR h.active = true) " +
+           "AND (h IS NULL OR (h.active = true AND " +
+           "(:time IS NULL OR (h.timeStart IS NULL OR h.timeStart <= :time) " +
+           "AND (h.timeEnd IS NULL OR h.timeEnd > :time)))) " +
            "ORDER BY p.createdAt DESC")
     List<PriceList> findCurrentPricesByProductUnit(
-        @Param("productUnitId") Long productUnitId
+        @Param("productUnitId") Long productUnitId,
+        @Param("time") java.time.LocalDateTime time
     );
 
     @Query("SELECT p FROM PriceList p LEFT JOIN p.priceHeader h " +

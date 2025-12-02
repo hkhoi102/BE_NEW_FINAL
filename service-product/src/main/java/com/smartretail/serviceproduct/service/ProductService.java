@@ -548,7 +548,7 @@ public class ProductService {
             java.util.List<PriceList> allPrices = priceListRepository.findByProductUnitIdAndActiveTrue(pu.getId());
             System.out.println("📊 Tất cả giá cho ProductUnit " + pu.getId() + ": " + allPrices.size() + " records");
 
-            PriceList currentPrice = priceListRepository.findCurrentPricesByProductUnit(pu.getId())
+            PriceList currentPrice = priceListRepository.findCurrentPricesByProductUnit(pu.getId(), now)
                 .stream()
                 .findFirst()
                 .orElse(null);
@@ -614,7 +614,7 @@ public class ProductService {
             java.util.List<PriceList> allPrices = priceListRepository.findByProductUnitIdAndActiveTrue(pu.getId());
             System.out.println("📊 Tất cả giá cho ProductUnit " + pu.getId() + ": " + allPrices.size() + " records");
 
-            PriceList currentPrice = priceListRepository.findCurrentPricesByProductUnit(pu.getId())
+            PriceList currentPrice = priceListRepository.findCurrentPricesByProductUnit(pu.getId(), now)
                 .stream()
                 .findFirst()
                 .orElse(null);
